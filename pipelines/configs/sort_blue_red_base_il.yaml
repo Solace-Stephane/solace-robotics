@@ -1,0 +1,19 @@
+run_name: sort_blue_red_base_il
+task_spec: ../task_specs/sort_blue_red_v1.yaml
+seed: 123
+output_dir: ../artifacts/sort_blue_red/base_il
+teacher_data:
+  episodes: 8000
+  max_steps_per_episode: 350
+model:
+  architecture: vla_student
+  backbone: siglip_dinov2_llm_style
+  action_head: sequence_chunking
+  chunk_size: 16
+training:
+  batch_size: 32
+  learning_rate: 0.0001
+  train_steps: 250000
+  eval_every_steps: 5000
+targets:
+  standard_success_rate: 0.70

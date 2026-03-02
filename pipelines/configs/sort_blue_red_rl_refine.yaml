@@ -1,0 +1,22 @@
+run_name: sort_blue_red_rl_refine
+task_spec: ../task_specs/sort_blue_red_v1.yaml
+seed: 124
+output_dir: ../artifacts/sort_blue_red/rl_refine
+init_checkpoint: ../artifacts/sort_blue_red/base_il/checkpoints/latest.pt
+algorithm:
+  name: ppo_residual
+  clip_range: 0.2
+  gamma: 0.99
+  gae_lambda: 0.95
+  lr: 0.00003
+training:
+  envs: 256
+  horizon: 64
+  updates: 5000
+curriculum_schedule:
+  easy_fraction: 0.45
+  medium_fraction: 0.35
+  hard_fraction: 0.20
+targets:
+  standard_success_rate: 0.82
+  hard_success_rate: 0.65

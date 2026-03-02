@@ -1,0 +1,17 @@
+run_name: sort_blue_red_eval
+task_spec: ../task_specs/sort_blue_red_v1.yaml
+seed: 125
+checkpoint: ../artifacts/sort_blue_red/rl_refine/checkpoints/latest.pt
+output_dir: ../artifacts/sort_blue_red/eval
+evaluation:
+  standard_seeds: 500
+  hard_seeds: 500
+  max_steps_per_episode: 350
+report:
+  markdown: true
+  json: true
+  include_failure_clusters: true
+  include_demo_clip_manifest: true
+acceptance:
+  standard_success_rate_min: 0.80
+  hard_success_rate_min: 0.60

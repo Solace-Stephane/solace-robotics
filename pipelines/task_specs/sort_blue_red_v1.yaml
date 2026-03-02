@@ -1,0 +1,79 @@
+task_id: sort_blue_red_v1
+instruction_templates:
+  - put the blue ball in the left bin and the red cube in the right bin
+  - sort objects by color: blue left, red right
+  - place blue to left tray and red to right tray
+embodiment: ALOHA
+workspace:
+  x: [0.22, 0.66]
+  y: [-0.32, 0.32]
+  z: [0.00, 0.32]
+objects:
+  blue_ball:
+    color: blue
+    shape: sphere
+    radius_m: 0.025
+    spawn_xy_range:
+      x: [0.34, 0.58]
+      y: [-0.20, 0.20]
+  red_cube:
+    color: red
+    shape: cube
+    side_m: 0.045
+    spawn_xy_range:
+      x: [0.34, 0.58]
+      y: [-0.20, 0.20]
+  left_bin:
+    label: left
+    center_xy: [0.30, -0.17]
+    radius_m: 0.075
+  right_bin:
+    label: right
+    center_xy: [0.30, 0.17]
+    radius_m: 0.075
+observations:
+  - front_rgb
+  - wrist_rgb
+  - joint_positions
+  - joint_velocities
+  - gripper_state
+  - language_instruction
+actions:
+  type: ee_delta_plus_gripper
+  dims: 7
+success:
+  description: both objects in correct bins for consecutive frames
+  required_consecutive_frames: 12
+  constraints:
+    blue_ball_in_left_bin: true
+    red_cube_in_right_bin: true
+reward_terms:
+  blue_progress_to_left_bin: 0.9
+  red_progress_to_right_bin: 0.9
+  object_pick_stability: 0.4
+  correct_partial_sort_bonus: 1.0
+  terminal_full_sort_bonus: 10.0
+  collision_penalty: -1.5
+  drop_penalty: -0.8
+  jerk_penalty: -0.1
+  timeout_penalty: -0.6
+domain_randomization:
+  lighting: true
+  textures: true
+  camera_jitter: true
+  friction_range: [0.6, 1.5]
+  latency_ms_range: [0, 80]
+  distractor_objects_range: [0, 4]
+curriculum:
+  - stage: easy
+    description: fixed bins, low spawn variance, no distractors
+    distractors: 0
+    spawn_variance: low
+  - stage: medium
+    description: variable spawns and one distractor
+    distractors: 1
+    spawn_variance: medium
+  - stage: hard
+    description: maximum spawn variance and clutter
+    distractors: 3
+    spawn_variance: high

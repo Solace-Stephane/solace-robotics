@@ -39,3 +39,19 @@ python3 scripts/run_eval.py --config configs/eval.yaml
 ```
 
 > Current scripts are production scaffolds with structured I/O and placeholders where simulator/training backends plug in.
+
+## First custom task: `sort_blue_red_v1`
+
+Language-conditioned ALOHA sorting task:
+- Blue ball -> left bin
+- Red cube -> right bin
+
+Run the scaffold pipeline for this task:
+
+```bash
+cd pipelines
+python3 scripts/generate_teacher_data.py --config configs/sort_blue_red_base_il.yaml
+python3 scripts/train_vla_student.py --config configs/sort_blue_red_base_il.yaml
+python3 scripts/rl_refine_student.py --config configs/sort_blue_red_rl_refine.yaml
+python3 scripts/run_eval.py --config configs/sort_blue_red_eval.yaml
+```
