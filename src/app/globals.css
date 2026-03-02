@@ -5,6 +5,7 @@
   --foreground: #101010;
   --muted: #525252;
   --line: #c9c9c9;
+  --panel: #fbfbf9;
 }
 
 html,
@@ -30,7 +31,7 @@ a {
 
 .site {
   min-height: 100vh;
-  padding-bottom: 4rem;
+  padding-bottom: 3rem;
 }
 
 .container {
@@ -75,13 +76,19 @@ a {
   font-size: 0.86rem;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.is-active {
   color: var(--foreground);
 }
 
 .hero {
   padding-top: clamp(3rem, 7vw, 6rem);
   padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.hero-compact {
+  padding-top: clamp(2.2rem, 5vw, 3.5rem);
+  padding-bottom: clamp(1.2rem, 3vw, 2.2rem);
 }
 
 .eyebrow {
@@ -130,6 +137,7 @@ a {
   border: 1px solid var(--foreground);
   text-decoration: none;
   font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .btn-solid {
@@ -174,7 +182,7 @@ a {
 
 .card {
   border: 1px solid var(--line);
-  background: #fbfbf9;
+  background: var(--panel);
   padding: 1rem;
 }
 
@@ -211,6 +219,74 @@ a {
 .ref-list a {
   text-underline-offset: 2px;
   color: var(--foreground);
+}
+
+.feature-list {
+  margin: 0.7rem 0 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.price {
+  color: var(--foreground) !important;
+  font-size: 1.06rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.lead-form {
+  margin-top: 0.65rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.lead-form label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lead-form input,
+.lead-form textarea {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--foreground);
+  padding: 0.62rem 0.7rem;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.form-success,
+.form-error {
+  font-size: 0.84rem;
+  margin: 0;
+}
+
+.form-success {
+  color: #1d4d2f;
+}
+
+.form-error {
+  color: #8f1f1f;
+}
+
+.footer {
+  margin-top: 3.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.2rem;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.text-muted {
+  color: var(--muted);
 }
 
 @keyframes typing {

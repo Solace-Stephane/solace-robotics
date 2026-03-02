@@ -1,3 +1,8 @@
+import Link from "next/link";
+
+import { SiteFooter } from "@/components/site-footer";
+import { SiteNav } from "@/components/site-nav";
+
 const PROOF = [
   {
     title: "Data Quality Score",
@@ -8,61 +13,33 @@ const PROOF = [
   {
     title: "Expected Value of Labeling",
     eq: "EV = Δp_success · V_task · N_episodes - C_labeling",
-    note:
-      "If EV > 0, the data-annotation program is economically justified.",
+    note: "If EV > 0, the annotation program is economically justified.",
   },
   {
     title: "Off-policy Risk Gap",
     eq: "R(π) = E_{τ~π}[ℓ(τ)],   gap = R_real(π) - R_sim(π)",
     note:
-      "Our objective is to reduce this gap using domain randomization and failure replay datasets.",
+      "Our objective is to reduce this gap via domain randomization and failure replay datasets.",
   },
 ];
 
 const REFS = [
-  {
-    name: "OpenVLA",
-    url: "https://openvla.github.io/",
-    claim: "Open-source VLA report describing pretraining on Open X-Embodiment episodes.",
-  },
+  { name: "OpenVLA", url: "https://openvla.github.io/" },
   {
     name: "Open X-Embodiment / RT-X",
     url: "https://robotics-transformer-x.github.io/",
-    claim: "Large multi-institution robot dataset and model effort.",
   },
   {
-    name: "Action Chunking with Transformers (ACT)",
+    name: "Action Chunking with Transformers",
     url: "https://arxiv.org/abs/2304.13705",
-    claim: "Sequence chunking for robust control from small demonstration sets.",
   },
-  {
-    name: "Diffusion Policy",
-    url: "https://arxiv.org/abs/2303.04137",
-    claim: "Action diffusion policy formulation with strong benchmark performance.",
-  },
-  {
-    name: "π0: Our First Generalist Policy",
-    url: "https://www.pi.website/blog/pi0",
-    claim: "Generalist policy framing for language-conditioned physical intelligence.",
-  },
+  { name: "Diffusion Policy", url: "https://arxiv.org/abs/2303.04137" },
 ];
 
 export default function Home() {
   return (
     <main className="site mono">
-      <header className="nav-wrap">
-        <nav className="container nav" aria-label="Main navigation">
-          <a href="#top" className="brand" aria-label="Solace Robotics Home">
-            Solace Robotics
-          </a>
-          <div className="nav-links">
-            <a href="#what">What we do</a>
-            <a href="#why">Why now</a>
-            <a href="#proof">Rigor</a>
-            <a href="#references">References</a>
-          </div>
-        </nav>
-      </header>
+      <SiteNav current="/" />
 
       <section id="top" className="container hero">
         <p className="eyebrow">Simulation-first robotics intelligence</p>
@@ -73,12 +50,12 @@ export default function Home() {
           hardware deployments.
         </p>
         <div className="hero-cta" role="group" aria-label="Primary actions">
-          <a className="btn btn-solid" href="#what">
-            Explore offering
-          </a>
-          <a className="btn btn-outline" href="#references">
-            View research basis
-          </a>
+          <Link className="btn btn-solid" href="/products">
+            Explore products
+          </Link>
+          <Link className="btn btn-outline" href="/submit-model">
+            Start pilot
+          </Link>
         </div>
       </section>
 
@@ -95,8 +72,8 @@ export default function Home() {
           <article className="card">
             <h3>Action-sequence labeling</h3>
             <p>
-              Phase boundaries, contact events, and language-action alignment for modern
-              policy classes.
+              Phase boundaries, contact events, and language-action alignment for
+              transformer, chunking, and diffusion policies.
             </p>
           </article>
           <article className="card">
@@ -113,17 +90,17 @@ export default function Home() {
         <h2 className="section-title">Why now</h2>
         <div className="grid cards-2">
           <article className="card">
-            <h3>Model capability is rising faster than data quality</h3>
+            <h3>Model capability is scaling faster than data quality</h3>
             <p>
-              The frontier has moved to vision-language-action and sequence models. Data
-              quality and evaluation rigor are now primary constraints.
+              Vision-language-action and sequence models are maturing quickly, but
+              temporally consistent action labels and benchmark discipline lag behind.
             </p>
           </article>
           <article className="card">
-            <h3>Simulation can compress product cycles</h3>
+            <h3>Simulation compresses iteration cycles</h3>
             <p>
-              Teams can iterate policy behavior, diagnose failure regimes, and improve
-              deployment confidence before expensive real-world rollouts.
+              Teams can map failure regimes, compare policies, and improve deployment
+              confidence before expensive physical rollouts.
             </p>
           </article>
         </div>
@@ -150,11 +127,12 @@ export default function Home() {
               <a href={ref.url} target="_blank" rel="noreferrer">
                 {ref.name}
               </a>
-              <span> — {ref.claim}</span>
             </li>
           ))}
         </ul>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }
