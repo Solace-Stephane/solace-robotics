@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { savePilotSubmission } from "@/lib/pilot-store";
+
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
 
@@ -7,14 +9,15 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
   }
 
-  console.log("[solace-robotics] new pilot request", {
-    name: body.name,
-    email: body.email,
-    company: body.company,
-    robotType: body.robotType,
-    notes: body.notes,
+  const submission = {
+    name: String(body.name),
+    email: String(body.email),
+    company: String(body.company),
+    robotType: String(body.robotType),
+    notes: String(body.notes),
     createdAt: new Date().toISOString(),
-  });
+  };
 
+  await savePilotSubmission(submission);
   return NextResponse.json({ ok: true });
 }
