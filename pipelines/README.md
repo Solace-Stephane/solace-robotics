@@ -28,6 +28,28 @@ This folder contains the first execution target for Solace Robotics:
    - Runs standard + hard benchmark seeds
    - Outputs score JSON and summary markdown
 
+## One-command run
+
+Run the full pipeline for any task with a single command, then build the report:
+
+```bash
+cd pipelines
+
+# Run all stages (teacher data → VLA training → RL refinement → evaluation)
+python3 scripts/run_task_pipeline.py \
+    --base-il configs/tie_rope_knot_base_il.yaml \
+    --rl-refine configs/tie_rope_knot_rl_refine.yaml \
+    --eval configs/tie_rope_knot_eval.yaml
+
+# Build structured report from eval artifacts
+python3 scripts/build_task_report.py --eval-config configs/tie_rope_knot_eval.yaml
+```
+
+Outputs in `artifacts/<task>/eval/`:
+- `pipeline_run_summary.json` — timestamps, stage results, success flag
+- `report.json` — structured scores, acceptance, artifact manifest
+- `report.md` — human-readable report
+
 ## Quickstart
 
 ```bash
