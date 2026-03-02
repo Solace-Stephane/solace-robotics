@@ -1,0 +1,19 @@
+run_name: tie_rope_knot_base_il
+task_spec: ../task_specs/tie_rope_knot_v1.yaml
+seed: 200
+output_dir: ../artifacts/tie_rope_knot/base_il
+teacher_data:
+  episodes: 10000
+  max_steps_per_episode: 500
+model:
+  architecture: vla_student
+  backbone: siglip_dinov2_llm_style
+  action_head: sequence_chunking
+  chunk_size: 20
+training:
+  batch_size: 32
+  learning_rate: 0.00008
+  train_steps: 300000
+  eval_every_steps: 5000
+targets:
+  standard_success_rate: 0.65

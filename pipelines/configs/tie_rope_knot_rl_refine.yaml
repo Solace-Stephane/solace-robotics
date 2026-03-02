@@ -1,0 +1,22 @@
+run_name: tie_rope_knot_rl_refine
+task_spec: ../task_specs/tie_rope_knot_v1.yaml
+seed: 201
+output_dir: ../artifacts/tie_rope_knot/rl_refine
+init_checkpoint: ../artifacts/tie_rope_knot/base_il/checkpoints/latest.pt
+algorithm:
+  name: ppo_residual
+  clip_range: 0.2
+  gamma: 0.99
+  gae_lambda: 0.95
+  lr: 0.00002
+training:
+  envs: 256
+  horizon: 96
+  updates: 6000
+curriculum_schedule:
+  easy_fraction: 0.50
+  medium_fraction: 0.30
+  hard_fraction: 0.20
+targets:
+  standard_success_rate: 0.80
+  hard_success_rate: 0.55

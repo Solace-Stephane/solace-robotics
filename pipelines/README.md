@@ -55,3 +55,21 @@ python3 scripts/train_vla_student.py --config configs/sort_blue_red_base_il.yaml
 python3 scripts/rl_refine_student.py --config configs/sort_blue_red_rl_refine.yaml
 python3 scripts/run_eval.py --config configs/sort_blue_red_eval.yaml
 ```
+
+## Deformable task: `tie_rope_knot_v1`
+
+First deformable-object manipulation task — tie a simple overhand knot with a rope.
+
+- Task spec: `task_specs/tie_rope_knot_v1.yaml`
+- Environment spec: `envs/tie_rope_knot_env.md`
+- Docs: `../docs/first_custom_task_tie_rope_knot.md`
+
+Run the scaffold pipeline for this task:
+
+```bash
+cd pipelines
+python3 scripts/generate_teacher_data.py --config configs/tie_rope_knot_base_il.yaml
+python3 scripts/train_vla_student.py --config configs/tie_rope_knot_base_il.yaml
+python3 scripts/rl_refine_student.py --config configs/tie_rope_knot_rl_refine.yaml
+python3 scripts/run_eval.py --config configs/tie_rope_knot_eval.yaml
+```
