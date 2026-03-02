@@ -89,6 +89,9 @@ export default function ProductsPage() {
           <Link className="btn btn-solid" href="/submit-model">
             Submit model for pilot
           </Link>
+          <Link className="btn btn-outline" href="/report-sample">
+            View sample report
+          </Link>
           <Link className="btn btn-outline" href="/research">
             Read methodology
           </Link>
