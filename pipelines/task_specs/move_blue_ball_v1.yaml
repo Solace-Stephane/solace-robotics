@@ -1,0 +1,58 @@
+task_id: move_blue_ball_v1
+instruction_templates:
+  - move the blue ball to the target zone
+  - push the blue ball into the marked area
+  - place the blue sphere in the goal region
+embodiment: ALOHA
+workspace:
+  x: [0.20, 0.65]
+  y: [-0.30, 0.30]
+  z: [0.00, 0.30]
+objects:
+  ball:
+    color: blue
+    radius_m: 0.025
+    spawn_xy_range:
+      x: [0.30, 0.58]
+      y: [-0.22, 0.22]
+  target_zone:
+    radius_m: 0.06
+    spawn_xy_range:
+      x: [0.28, 0.60]
+      y: [-0.24, 0.24]
+observations:
+  - front_rgb
+  - wrist_rgb
+  - joint_positions
+  - joint_velocities
+  - gripper_state
+actions:
+  type: ee_delta_plus_gripper
+  dims: 7
+success:
+  description: ball center inside target radius for consecutive frames
+  required_consecutive_frames: 10
+reward_terms:
+  approach_ball: 0.8
+  contact_stability: 0.5
+  progress_to_target: 1.2
+  terminal_success: 8.0
+  collision_penalty: -1.5
+  jerk_penalty: -0.1
+  timeout_penalty: -0.5
+domain_randomization:
+  lighting: true
+  textures: true
+  camera_jitter: true
+  friction_range: [0.6, 1.4]
+  latency_ms_range: [0, 80]
+curriculum:
+  - stage: easy
+    distractors: 0
+    spawn_variance: low
+  - stage: medium
+    distractors: 1
+    spawn_variance: medium
+  - stage: hard
+    distractors: 3
+    spawn_variance: high

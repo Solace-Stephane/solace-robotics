@@ -1,0 +1,17 @@
+run_name: move_blue_ball_eval
+task_spec: ../task_specs/move_blue_ball_v1.yaml
+seed: 99
+checkpoint: ../artifacts/move_blue_ball/rl_refine/checkpoints/latest.pt
+output_dir: ../artifacts/move_blue_ball/eval
+evaluation:
+  standard_seeds: 500
+  hard_seeds: 500
+  max_steps_per_episode: 300
+report:
+  markdown: true
+  json: true
+  include_failure_clusters: true
+  include_demo_clip_manifest: true
+acceptance:
+  standard_success_rate_min: 0.80
+  hard_success_rate_min: 0.60

@@ -1,0 +1,19 @@
+run_name: move_blue_ball_base_il
+task_spec: ../task_specs/move_blue_ball_v1.yaml
+seed: 42
+output_dir: ../artifacts/move_blue_ball/base_il
+teacher_data:
+  episodes: 5000
+  max_steps_per_episode: 300
+model:
+  architecture: vla_student
+  backbone: siglip_dinov2_llm_style
+  action_head: sequence_chunking
+  chunk_size: 12
+training:
+  batch_size: 32
+  learning_rate: 0.0001
+  train_steps: 200000
+  eval_every_steps: 5000
+targets:
+  standard_success_rate: 0.70

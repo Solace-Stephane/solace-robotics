@@ -1,0 +1,22 @@
+run_name: move_blue_ball_rl_refine
+task_spec: ../task_specs/move_blue_ball_v1.yaml
+seed: 43
+output_dir: ../artifacts/move_blue_ball/rl_refine
+init_checkpoint: ../artifacts/move_blue_ball/base_il/checkpoints/latest.pt
+algorithm:
+  name: ppo_residual
+  clip_range: 0.2
+  gamma: 0.99
+  gae_lambda: 0.95
+  lr: 0.00003
+training:
+  envs: 256
+  horizon: 64
+  updates: 4000
+curriculum_schedule:
+  easy_fraction: 0.5
+  medium_fraction: 0.3
+  hard_fraction: 0.2
+targets:
+  standard_success_rate: 0.80
+  hard_success_rate: 0.60
